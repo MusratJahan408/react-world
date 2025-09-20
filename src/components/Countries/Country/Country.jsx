@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 
-const Country = ({ country }) => {
+const Country = ({ country, handleVisitedCountries }) => {
+  const [visited, setVisited] = useState(false);
   const handleVisited = () => {
-    console.log("visited");
+    setVisited(!visited);
+    handleVisitedCountries(country);
   };
   return (
-    <div className="border-2 border-amber-600 p-5 rounded-2xl">
+    <div
+      className={`border-2 border-amber-600 p-5 rounded-2xl ${
+        visited && "bg-amber-100"
+      }`}
+    >
       <img
         className="w-full h-40 object-cover rounded"
         src={country.flags.flags.png}
@@ -22,7 +28,7 @@ const Country = ({ country }) => {
           className="bg-amber-600 px-5 py-2 mt-2 text-white rounded-2xl"
           onClick={handleVisited}
         >
-          Not Interested
+          {visited ? "Visited" : "Not Visited"}
         </button>
       </div>
     </div>
